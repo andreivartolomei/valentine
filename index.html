@@ -1,71 +1,79 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine?</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background-color: #fce4ec;
-        }
-        .card {
-            background: white;
-            padding: 40px;
-            border-radius: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 400px;
-            border: 8px solid #ff4081;
-        }
-        h1 {
-            color: #ff4081;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        #main-img {
-            width: 100%;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            display: block;
-        }
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        button {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 15px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        #yes {
-            background: #ff4081;
-            color: white;
-        }
-        #no {
-            background: #bdbdbd;
-            color: white;
-            position: relative;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine?</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        background-color: #fce4ec; /* Roz deschis */
+    }
+    .card {
+        background: white;
+        padding: 30px;
+        border-radius: 25px;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        max-width: 350px;
+        border: 6px solid #ff4081;
+    }
+    h1 {
+        color: #ff4081;
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+    #main-img {
+        width: 100%;
+        border-radius: 15px;
+        margin-bottom: 15px;
+        display: block;
+    }
+    .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+    }
+    button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    #yes {
+        background: #ff4081;
+        color: white;
+    }
+    #no {
+        background: #bdbdbd;
+        color: white;
+        position: relative;
+    }
+    #reasons {
+        text-align: left;
+        margin-top: 20px;
+        font-size: 14px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+</style>
 </head>
 <body>
 
 <div class="card">
-    <div style="font-size: 30px;">✉️</div>
+    <div style="font-size: 25px;">✉️</div>
     <h1>Will you be my Valentine?</h1>
     
-    <!-- Imagine locală în același folder -->
     <img id="main-img" src="pisica.jpg" alt="Cute Cat">
 
     <div class="buttons">
@@ -75,35 +83,110 @@
 </div>
 
 <script>
-    const imgElement = document.getElementById("main-img");
-    
-    // Imagine tristă la hover pe No (poți pune o altă imagine locală dacă vrei)
-    const sadCatImg = "pisica-trista.jpg"; // pune această imagine în același folder dacă vrei efectul
-    const happyCatImg = "pisica.jpg";
+const imgElement = document.getElementById("main-img");
+const noButton = document.getElementById("no");
+const yesButton = document.getElementById("yes");
 
-    function move() {
-        const no = document.getElementById("no");
-        
-        // Schimbăm imaginea în cea tristă
-        imgElement.src = sadCatImg;
+// Imagine când vrea să apese No
+const noImg = "nu.jpeg";
+// Imagine când apasă Yes
+const yesImg = "da.jpeg";
 
-        // Mutăm butonul aleator
-        const x = Math.random() * (window.innerWidth - no.offsetWidth);
-        const y = Math.random() * (window.innerHeight - no.offsetHeight);
-        
-        no.style.position = "absolute";
-        no.style.left = x + "px";
-        no.style.top = y + "px";
-    }
+function move() {
+    // schimbăm imaginea când încearcă să apese No
+    imgElement.src = noImg;
 
-    function yes() {
-        document.body.innerHTML = `
-            <div style="text-align:center;">
-                <h1 style="color:#ff4081; font-size: 50px;">YAAAY! ❤️ 🥰</h1>
-                <img src="pisica-happy.gif" style="width:300px; border-radius:20px;">
+    // mutăm butonul No aleator
+    const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+    noButton.style.position = "absolute";
+    noButton.style.left = x + "px";
+    noButton.style.top = y + "px";
+}
+
+function yes() {
+    document.body.innerHTML = `
+        <div style="text-align:center;">
+            <h1 style="color:#ff4081; font-size:30px;">Yaay I love you Smuchiț ❤️❤️❤️</h1>
+            <img src="${yesImg}" style="width:300px; border-radius:20px; margin-bottom:15px;">
+            <div class="buttons">
+                <button onclick="showReasons()">50 reasons why I love you</button>
+                <button onclick="kiss()">Kiss 💋</button>
             </div>
-        `;
-    }
+            <div id="reasons"></div>
+        </div>
+    `;
+}
+
+function showReasons() {
+    const reasons = [
+        "Your smile makes my day",
+        "You understand me",
+        "You make me laugh",
+        "You care about me",
+        "You are beautiful inside and out",
+        "You support me",
+        "You believe in me",
+        "You make me feel safe",
+        "You inspire me",
+        "You are kind",
+        "You are smart",
+        "You are cute",
+        "You listen to me",
+        "You make everything better",
+        "You are patient",
+        "You are honest",
+        "You are special",
+        "You are my best friend",
+        "You are my peace",
+        "You are my happiness",
+        "Your voice comforts me",
+        "Your laugh is adorable",
+        "You motivate me",
+        "You complete me",
+        "You respect me",
+        "You make me feel loved",
+        "You are thoughtful",
+        "You surprise me",
+        "You care about my feelings",
+        "You make my heart race",
+        "You make me proud",
+        "You are warm-hearted",
+        "You are my sunshine",
+        "You are my dream",
+        "You make me feel lucky",
+        "You calm me down",
+        "You make me stronger",
+        "You are unique",
+        "You are my favorite person",
+        "You make love feel easy",
+        "You are my comfort",
+        "You are my joy",
+        "You make life sweeter",
+        "You are my forever",
+        "You are my heart",
+        "You make me feel alive",
+        "You are my everything",
+        "You are my Valentine",
+        "I love you ❤️"
+    ];
+
+    const container = document.getElementById("reasons");
+    container.innerHTML = "<ol>" + reasons.map(r => `<li>${r}</li>`).join("") + "</ol>";
+}
+
+function kiss() {
+    const kissEmoji = document.createElement("div");
+    kissEmoji.textContent = "💋";
+    kissEmoji.style.position = "absolute";
+    kissEmoji.style.left = Math.random() * (window.innerWidth - 50) + "px";
+    kissEmoji.style.top = Math.random() * (window.innerHeight - 50) + "px";
+    kissEmoji.style.fontSize = "30px";
+    document.body.appendChild(kissEmoji);
+
+    // dispare după 2 secunde
+    setTimeout(() => kissEmoji.remove(), 2000);
+}
 </script>
 
 </body>
