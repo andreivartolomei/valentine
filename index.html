@@ -11,8 +11,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Comic Sans MS', cursive, sans-serif; /* Un font mai jucăuș */
-            background-color: #fce4ec; /* Roz deschis ca fundalul din poză */
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fce4ec;
         }
         .card {
             background: white;
@@ -21,7 +21,7 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             max-width: 400px;
-            border: 8px solid #ff4081; /* Marginea roz */
+            border: 8px solid #ff4081;
         }
         h1 {
             color: #ff4081;
@@ -65,7 +65,8 @@
     <div style="font-size: 30px;">✉️</div>
     <h1>Will you be my Valentine?</h1>
     
-    <img id="main-img" src="https://i.pinimg.com/originals/c6/33/74/c63374895690623a4114407077973809.jpg" alt="Cute Cat">
+    <!-- Imagine locală în același folder -->
+    <img id="main-img" src="pisica.jpg" alt="Cute Cat">
 
     <div class="buttons">
         <button id="yes" onclick="yes()">Yes 😍</button>
@@ -76,18 +77,17 @@
 <script>
     const imgElement = document.getElementById("main-img");
     
-    // Link către o imagine tristă când fuge butonul "No"
-    const sadCatImg = "https://media.tenor.com/0v8Yp_M_a6UAAAAM/sad-cat.gif";
-    // Link către imaginea inițială
-    const happyCatImg = "https://i.pinimg.com/originals/c6/33/74/c63374895690623a4114407077973809.jpg";
+    // Imagine tristă la hover pe No (poți pune o altă imagine locală dacă vrei)
+    const sadCatImg = "pisica-trista.jpg"; // pune această imagine în același folder dacă vrei efectul
+    const happyCatImg = "pisica.jpg";
 
     function move() {
         const no = document.getElementById("no");
         
-        // Schimbăm imaginea în una tristă
+        // Schimbăm imaginea în cea tristă
         imgElement.src = sadCatImg;
 
-        // Mutăm butonul
+        // Mutăm butonul aleator
         const x = Math.random() * (window.innerWidth - no.offsetWidth);
         const y = Math.random() * (window.innerHeight - no.offsetHeight);
         
@@ -100,7 +100,7 @@
         document.body.innerHTML = `
             <div style="text-align:center;">
                 <h1 style="color:#ff4081; font-size: 50px;">YAAAY! ❤️ 🥰</h1>
-                <img src="https://media.tenor.com/gU_Pb_S5vMQAAAAM/goma-happy.gif" style="width:300px; border-radius:20px;">
+                <img src="pisica-happy.gif" style="width:300px; border-radius:20px;">
             </div>
         `;
     }
