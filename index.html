@@ -1,62 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine?</title>
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-}
-.card {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-button {
-  padding: 10px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 10px;
-  font-size: 18px;
-  cursor: pointer;
-}
-#yes {
-  background: #4CAF50;
-  color: white;
-}
-#no {
-  background: #f44336;
-  color: white;
-  position: relative;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine?</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Un font mai jucăuș */
+            background-color: #fce4ec; /* Roz deschis ca fundalul din poză */
+        }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
+            border: 8px solid #ff4081; /* Marginea roz */
+        }
+        h1 {
+            color: #ff4081;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        #main-img {
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        #yes {
+            background: #ff4081;
+            color: white;
+        }
+        #no {
+            background: #bdbdbd;
+            color: white;
+            position: relative;
+        }
+    </style>
 </head>
 <body>
+
 <div class="card">
-  <h1>Will you be my Valentine? ❤️</h1>
-  <button id="yes" onclick="yes()">Yes</button>
-  <button id="no" onmouseover="move()">No</button>
+    <div style="font-size: 30px;">✉️</div>
+    <h1>Will you be my Valentine?</h1>
+    
+    <img id="main-img" src="https://i.pinimg.com/originals/c6/33/74/c63374895690623a4114407077973809.jpg" alt="Cute Cat">
+
+    <div class="buttons">
+        <button id="yes" onclick="yes()">Yes 😍</button>
+        <button id="no" onmouseover="move()" onclick="move()">No 🙄</button>
+    </div>
 </div>
 
 <script>
-function move() {
-  const no = document.getElementById("no");
-  no.style.position = "absolute";
-  no.style.left = Math.random() * 80 + "%";
-  no.style.top = Math.random() * 80 + "%";
-}
-function yes() {
-  document.body.innerHTML = "<h1 style='color:white;text-align:center'>YAAAY ❤️🥰</h1>";
-}
+    const imgElement = document.getElementById("main-img");
+    
+    // Link către o imagine tristă când fuge butonul "No"
+    const sadCatImg = "https://media.tenor.com/0v8Yp_M_a6UAAAAM/sad-cat.gif";
+    // Link către imaginea inițială
+    const happyCatImg = "https://i.pinimg.com/originals/c6/33/74/c63374895690623a4114407077973809.jpg";
+
+    function move() {
+        const no = document.getElementById("no");
+        
+        // Schimbăm imaginea în una tristă
+        imgElement.src = sadCatImg;
+
+        // Mutăm butonul
+        const x = Math.random() * (window.innerWidth - no.offsetWidth);
+        const y = Math.random() * (window.innerHeight - no.offsetHeight);
+        
+        no.style.position = "absolute";
+        no.style.left = x + "px";
+        no.style.top = y + "px";
+    }
+
+    function yes() {
+        document.body.innerHTML = `
+            <div style="text-align:center;">
+                <h1 style="color:#ff4081; font-size: 50px;">YAAAY! ❤️ 🥰</h1>
+                <img src="https://media.tenor.com/gU_Pb_S5vMQAAAAM/goma-happy.gif" style="width:300px; border-radius:20px;">
+            </div>
+        `;
+    }
 </script>
+
 </body>
 </html>
