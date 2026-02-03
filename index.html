@@ -5,107 +5,106 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine?</title>
 <style>
-    body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: 'Comic Sans MS', cursive, sans-serif;
-        background-color: #fce4ec;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 10px;
-        overflow-y: auto;
-    }
+body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #fce4ec;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px;
+}
 
-    .card {
-        background: white;
-        padding: 15px;
-        border-radius: 20px;
-        text-align: center;
-        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-        width: 100%;
-        max-width: 320px;
-        border: 6px solid #ff4081;
-        box-sizing: border-box;
-    }
+.card {
+    background: white;
+    border: 6px solid #ff4081;
+    border-radius: 20px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 320px;
+    max-height: 90vh; /* Card-ul nu depășește 90% din ecran */
+    overflow-y: auto; /* Scroll vertical dacă conținutul e mare */
+    box-sizing: border-box;
+}
 
-    h1 {
-        color: #ff4081;
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-        word-wrap: break-word;
-    }
+h1 {
+    color: #ff4081;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
 
+#main-img {
+    width: 100%;
+    height: auto;
+    max-height: 200px; /* imaginea nu depășește card-ul */
+    border-radius: 15px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#yes {
+    background: #ff4081;
+    color: white;
+}
+
+#no {
+    background: #bdbdbd;
+    color: white;
+}
+
+#reasons {
+    text-align: left;
+    margin-top: 15px;
+    font-size: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 5px;
+}
+
+.lovey-button {
+    background: linear-gradient(135deg, #ff4081, #ff80ab);
+    color: white;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(255,64,129,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.lovey-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(255,64,129,0.6);
+}
+
+@media (max-width: 400px) {
     #main-img {
-        width: 100%;
-        height: auto;
-        max-height: 200px;
-        border-radius: 15px;
-        margin-bottom: 10px;
-        object-fit: cover;
+        max-height: 150px;
     }
-
-    .buttons {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-top: 10px;
+    h1 {
+        font-size: 1.3rem;
     }
-
-    button {
-        padding: 8px 12px;
-        border: none;
-        border-radius: 10px;
-        font-size: 14px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    #yes {
-        background: #ff4081;
-        color: white;
-    }
-
-    #no {
-        background: #bdbdbd;
-        color: white;
-        position: relative;
-    }
-
-    #reasons {
-        text-align: left;
-        margin-top: 15px;
-        font-size: 12px;
-        max-height: 200px;
-        overflow-y: auto;
-        padding: 5px;
-    }
-
-    /* Butoane după Yes */
-    .lovey-button {
-        background: linear-gradient(135deg, #ff4081, #ff80ab);
-        color: white;
-        padding: 8px 12px;
-        font-size: 14px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(255,64,129,0.4);
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .lovey-button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 18px rgba(255,64,129,0.6);
-    }
-
-    @media (max-width: 400px) {
-        #main-img {
-            max-height: 150px;
-        }
-        h1 {
-            font-size: 1.3rem;
-        }
-    }
+}
 </style>
 </head>
 <body>
@@ -113,9 +112,7 @@
 <div class="card" id="card">
     <div style="font-size: 25px;">✉️</div>
     <h1 id="title">Will you be my Valentine?</h1>
-    
     <img id="main-img" src="pisica.jpg" alt="Cute Cat">
-
     <div class="buttons">
         <button id="yes" onclick="yes()">Yes 😍</button>
         <button id="no" onmouseover="move()" onclick="move()">No 🙄</button>
@@ -131,19 +128,18 @@ const noImg = "no.jpg";
 
 function move() {
     imgElement.src = noImg;
-    title.textContent = "Di şe? 🥺"; // schimbă titlul principal
-
-    const x = Math.random() * (window.innerWidth - noButton.offsetWidth - 20);
-    const y = Math.random() * (window.innerHeight - noButton.offsetHeight - 20);
-
-    noButton.style.position = "absolute";
-    noButton.style.left = x + "px";
-    noButton.style.top = y + "px";
+    title.textContent = "Di şe? 🥺";
+    // Mutare mică doar lateral pe mobil
+    const maxX = 200; // nu scoate butonul din card
+    const maxY = 10;
+    noButton.style.position = "relative";
+    noButton.style.left = (Math.random() * maxX) + "px";
+    noButton.style.top = (Math.random() * maxY) + "px";
 }
 
 function yes() {
     document.body.innerHTML = `
-    <div class="card" style="max-height:90vh; overflow-y:auto;">
+    <div class="card">
         <h1 style="color:#ff4081; font-size:20px; margin-bottom:10px;">Yaay I love you Smuchiț ❤️❤️❤️</h1>
         <img src="${yesImg}" style="width:100%; border-radius:20px; margin-bottom:10px; max-height:250px; object-fit:cover;">
         <div class="buttons">
