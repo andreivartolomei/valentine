@@ -13,14 +13,15 @@
         justify-content: center;
         font-family: 'Comic Sans MS', cursive, sans-serif;
         background-color: #fce4ec; /* Roz deschis */
+        overflow: hidden;
     }
     .card {
         background: white;
-        padding: 30px;
+        padding: 25px;
         border-radius: 25px;
         text-align: center;
         box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        max-width: 350px;
+        max-width: 320px;
         border: 6px solid #ff4081;
     }
     h1 {
@@ -37,15 +38,15 @@
     .buttons {
         display: flex;
         justify-content: center;
-        gap: 15px;
+        gap: 10px;
         margin-top: 15px;
         flex-wrap: wrap;
     }
     button {
-        padding: 10px 20px;
+        padding: 8px 15px;
         border: none;
         border-radius: 10px;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
         cursor: pointer;
         transition: transform 0.2s;
@@ -62,15 +63,16 @@
     #reasons {
         text-align: left;
         margin-top: 20px;
-        font-size: 14px;
+        font-size: 12px;
         max-height: 200px;
         overflow-y: auto;
+        padding: 5px;
     }
 </style>
 </head>
 <body>
 
-<div class="card">
+<div class="card" id="card">
     <div style="font-size: 25px;">✉️</div>
     <h1>Will you be my Valentine?</h1>
     
@@ -85,29 +87,26 @@
 <script>
 const imgElement = document.getElementById("main-img");
 const noButton = document.getElementById("no");
-const yesButton = document.getElementById("yes");
+const yesImg = "yes.jpg";
+const noImg = "no.jpg";
 
-// Imagine când vrea să apese No
-const noImg = "no.jpeg";
-// Imagine când apasă Yes
-const yesImg = "yes.jpeg";
-
+// Funcție pentru butonul "No" care fuge și schimbă imaginea
 function move() {
-    // schimbăm imaginea când încearcă să apese No
     imgElement.src = noImg;
 
-    // mutăm butonul No aleator
     const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
     const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+
     noButton.style.position = "absolute";
     noButton.style.left = x + "px";
     noButton.style.top = y + "px";
 }
 
+// Funcție când apasă Yes
 function yes() {
     document.body.innerHTML = `
         <div style="text-align:center;">
-            <h1 style="color:#ff4081; font-size:30px;">Yaay I love you Smuchiț ❤️❤️❤️</h1>
+            <h1 style="color:#ff4081; font-size:24px; margin-bottom:15px;">Yaay I love you Smuchiț ❤️❤️❤️</h1>
             <img src="${yesImg}" style="width:300px; border-radius:20px; margin-bottom:15px;">
             <div class="buttons">
                 <button onclick="showReasons()">50 reasons why I love you</button>
@@ -118,6 +117,7 @@ function yes() {
     `;
 }
 
+// Lista de 50 reasons
 function showReasons() {
     const reasons = [
         "Your smile makes my day",
@@ -175,6 +175,7 @@ function showReasons() {
     container.innerHTML = "<ol>" + reasons.map(r => `<li>${r}</li>`).join("") + "</ol>";
 }
 
+// Funcție pentru butonul Kiss
 function kiss() {
     const kissEmoji = document.createElement("div");
     kissEmoji.textContent = "💋";
@@ -184,7 +185,6 @@ function kiss() {
     kissEmoji.style.fontSize = "30px";
     document.body.appendChild(kissEmoji);
 
-    // dispare după 2 secunde
     setTimeout(() => kissEmoji.remove(), 2000);
 }
 </script>
