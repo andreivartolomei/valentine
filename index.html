@@ -11,7 +11,6 @@ body {
     background-color: #fce4ec;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
     padding: 10px;
 }
 
@@ -23,9 +22,8 @@ body {
     text-align: center;
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
     width: 100%;
-    max-width: 320px;
-    max-height: 90vh; /* Card-ul nu depășește 90% din ecran */
-    overflow-y: auto; /* Scroll vertical dacă conținutul e mare */
+    max-width: 350px;
+    /* Nu mai setăm max-height, să lase scroll body-ului */
     box-sizing: border-box;
 }
 
@@ -38,11 +36,10 @@ h1 {
 
 #main-img {
     width: 100%;
-    height: auto;
-    max-height: 200px; /* imaginea nu depășește card-ul */
+    height: auto; /* imaginea se vede full, păstrează proporțiile */
     border-radius: 15px;
     margin-bottom: 10px;
-    object-fit: cover;
+    display: block;
 }
 
 .buttons {
@@ -96,15 +93,6 @@ button {
     transform: scale(1.05);
     box-shadow: 0 6px 18px rgba(255,64,129,0.6);
 }
-
-@media (max-width: 400px) {
-    #main-img {
-        max-height: 150px;
-    }
-    h1 {
-        font-size: 1.3rem;
-    }
-}
 </style>
 </head>
 <body>
@@ -129,19 +117,17 @@ const noImg = "no.jpg";
 function move() {
     imgElement.src = noImg;
     title.textContent = "Di şe? 🥺";
-    // Mutare mică doar lateral pe mobil
-    const maxX = 200; // nu scoate butonul din card
-    const maxY = 10;
+    // butonul se mută puțin, dar rămâne vizibil
     noButton.style.position = "relative";
-    noButton.style.left = (Math.random() * maxX) + "px";
-    noButton.style.top = (Math.random() * maxY) + "px";
+    noButton.style.left = (Math.random() * 20) + "px";
+    noButton.style.top = (Math.random() * 5) + "px";
 }
 
 function yes() {
     document.body.innerHTML = `
     <div class="card">
         <h1 style="color:#ff4081; font-size:20px; margin-bottom:10px;">Yaay I love you Smuchiț ❤️❤️❤️</h1>
-        <img src="${yesImg}" style="width:100%; border-radius:20px; margin-bottom:10px; max-height:250px; object-fit:cover;">
+        <img src="${yesImg}" style="width:100%; border-radius:20px; margin-bottom:10px; height:auto;">
         <div class="buttons">
             <button class="lovey-button" onclick="showReasons()">50 reasons why I love you</button>
             <button class="lovey-button" onclick="kiss()">Kiss 💋</button>
